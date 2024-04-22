@@ -7,10 +7,15 @@ import { ThemeProvider } from '@mui/styles';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import Layout from './pages/Layout';
+import Login from './pages/Login';
 
 const theme = createTheme();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <Login />,
+  },
   {
     element: <Layout />,
     children: [
