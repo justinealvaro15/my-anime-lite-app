@@ -6,13 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@mui/styles';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
+import Layout from './pages/Layout';
 
 const theme = createTheme();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />,
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+    ],
   },
 ]);
 
