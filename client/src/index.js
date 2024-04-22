@@ -8,6 +8,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import Layout from './pages/Layout';
 import Login from './pages/Login';
+import Auth from './pages/Auth';
+import { Provider } from 'react-redux'
+import { store } from './store';
 
 const theme = createTheme();
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/oauth",
+    element: <Auth />,
   },
   {
     element: <Layout />,
@@ -29,9 +36,11 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>
 );
 

@@ -3,9 +3,14 @@ import { Box, Typography } from "@mui/material";
 import Footer from "../../components/Footer"
 import Button from "../../components/Button";
 import { useStyles } from "./styles";
+import useLoginHelper from "../../hooks/useLoginHelper";
 
 const Login = () => {
     const classes = useStyles();
+    const { onLogin } = useLoginHelper();
+    const handleLogin = async () => {
+        await onLogin();
+    };
 
     return (
         <Box className={classes.root}>
@@ -26,7 +31,7 @@ const Login = () => {
                         You'd need a MAL account to access the features.
                     </Typography>
                 </Box>
-                <Button size="large" variant="contained" disableElevation>
+                <Button size="large" variant="contained" disableElevation onClick={handleLogin}>
                     LOGIN VIA MAL
                 </Button>
             </Box>
