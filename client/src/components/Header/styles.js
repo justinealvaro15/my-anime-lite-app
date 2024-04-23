@@ -25,5 +25,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     user: {
         display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
     },
 }));

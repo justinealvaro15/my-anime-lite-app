@@ -2,10 +2,22 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const MAL_CLIENT_ID = process.env.REACT_APP_MAL_CLIENT_ID;
 
+const getToken = async () => {
+    const token = await localStorage.getItem('access_token');
+    return token;
+}
+
 export const myAnimeListApi = createApi({
     reducerPath: 'myAnimeListApi',
     baseQuery: fetchBaseQuery({
         baseUrl: '/api/anime',
+        prepareHeaders: async (headers, query) => {
+            const token = await getToken();
+            if (token) {
+                headers.set('Authorization', `Bearer ${token}`);
+            }
+            return headers;
+        }
     }),
     endpoints: (builder) => ({
         getAccessToken: builder.mutation({
@@ -24,7 +36,14 @@ export const myAnimeListApi = createApi({
                 };
             },
         }),
+        getCurrentUserInfo: builder.query({
+            query: () => {
+                return {
+                    url: '/userInfo',
+                };
+            },
+        }),
     }),
 })
 
-export const { useGetAccessTokenMutation } = myAnimeListApi;
+export const { useGetAccessTokenMutation, useLazyGetCurrentUserInfoQuery } = myAnimeListApi;
