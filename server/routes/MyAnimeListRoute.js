@@ -33,7 +33,6 @@ router.get('/userInfo', async (req, res) => {
         });
         const response = await reqInstance.get(`${MAL_API_BASE_URL}/users/@me`)
             .then((response) => {
-                console.log('response', response);
                 res.json(response.data)
             });
     } catch (err) {
@@ -86,6 +85,24 @@ router.get('/info/:id', async (req, res) => {
                 res.json(humps.camelizeKeys(response.data))
             });
     } catch (err) {
+        res.json({ message: err.message })
+    }
+});
+
+router.get('/animeList', async (req, res) => {
+    try {
+        const bearerToken = req.get('Authorization');
+        const reqInstance = axios.create({
+            headers: {
+                Authorization: bearerToken
+            },
+        });
+        const animeList = await reqInstance.get(`${MAL_API_BASE_URL}/anime/ranking?fields=id,title,main_picture,start_date,synopsis,mean,rank,num_list_users,status,genres,num_episodes,start_season,average_episode_duration,rating,studios`)
+            .then((response) => {
+                res.json(humps.camelizeKeys(response.data.data));
+            });
+    } catch (err) {
+        console.log(err)
         res.json({ message: err.message })
     }
 });

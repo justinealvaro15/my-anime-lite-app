@@ -14,7 +14,9 @@ const Layout = () => {
             <Header />
             <Navbar />
             <Box className={classes.content}>
-                <Outlet />
+                <Box className={classes.container}>
+                    <Outlet />
+                </Box>
             </Box>
             <Footer />
         </Box>

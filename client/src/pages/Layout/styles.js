@@ -6,15 +6,18 @@ export const useStyles = makeStyles((theme) => ({
         width: '100vw',
         display: 'flex',
         flexDirection: 'column',
-        overflowX: 'hidden',
-        overflowY: 'auto',
+        overflow: 'hidden',
     },
     content: {
         display: 'flex',
-        alignSelf: 'center',
-        padding: '10px',
-        maxWidth: '1200px',
+        justifyContent: 'center',
         width: '100%',
         height: '100%',
+        overflowY: 'auto',
+    },
+    container: {
+        maxWidth: '1200px',
+        width: '100%',
+        padding: '12px',
     },
 }));

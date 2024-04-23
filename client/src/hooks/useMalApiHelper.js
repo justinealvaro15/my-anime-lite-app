@@ -1,10 +1,11 @@
 import { useDispatch } from "react-redux";
-import { useLazyGetAnimeInfoQuery, useLazyGetCurrentUserInfoQuery, useLazyGetDashboardAnimeListQuery } from "../services/myAnimeListApi";
-import { setAnimeInfo, setDashboardAnimeList, setUserInfo } from "../slice/myAnimeListSlice";
+import { useLazyGetAllAnimeListQuery, useLazyGetAnimeInfoQuery, useLazyGetCurrentUserInfoQuery, useLazyGetDashboardAnimeListQuery } from "../services/myAnimeListApi";
+import { setAllAnimeList, setAnimeInfo, setDashboardAnimeList, setUserInfo } from "../slice/myAnimeListSlice";
 
 const useMalApiHelper = (url) => {
     const dispatch = useDispatch();
     const [triggerGetUserInfo] = useLazyGetCurrentUserInfoQuery();
+    const [triggerGetAllInfo] = useLazyGetAllAnimeListQuery();
     const [triggerGetDashboardInfo] = useLazyGetDashboardAnimeListQuery();
     const [triggerGetAnimeInfo, { isLoading: isAnimeInfoLoading }] = useLazyGetAnimeInfoQuery();
 
@@ -12,6 +13,15 @@ const useMalApiHelper = (url) => {
         try {
             const response = await triggerGetUserInfo();
             dispatch(setUserInfo(response.data));
+        } catch (error) {
+            console.error('Error encountered:', error)
+        }
+    };
+
+    const handleGetAllAnimeList = async (code, codeVerifier) => {
+        try {
+            const response = await triggerGetAllInfo();
+            dispatch(setAllAnimeList(response.data));
         } catch (error) {
             console.error('Error encountered:', error)
         }
@@ -38,6 +48,7 @@ const useMalApiHelper = (url) => {
     return {
         onGetUserInfo: handleGetUserInfo,
         onGetAnimeInfo: handleGetAnimeInfo,
+        onGetAllAnimeList: handleGetAllAnimeList,
         onGetDashboardAnimeList: handleGetDashboardAnimeList,
         isAnimeInfoLoading,
     };
