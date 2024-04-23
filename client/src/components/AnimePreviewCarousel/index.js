@@ -5,10 +5,9 @@ import Carousel from "react-material-ui-carousel";
 import AnimePreview from "../AnimePreview";
 
 import { useStyles } from "./styles";
-import { DUMMY_DATA } from "./dummy";
 import { groupIntoChunks } from "./utils";
 
-const AnimePreviewCarousel = ({ headerText }) => {
+const AnimePreviewCarousel = ({ headerText, data = [] }) => {
     const classes = useStyles();
 
     return (
@@ -20,14 +19,14 @@ const AnimePreviewCarousel = ({ headerText }) => {
             </Box>
             <Box>
                 <Carousel autoPlay={false} indicators={false} height={350}>
-                    {groupIntoChunks(DUMMY_DATA, 5).map((group, groupIndex) => (
+                    {groupIntoChunks(data, 5).map((group, groupIndex) => (
                         <Grid container key={groupIndex} className={classes.row} flexWrap="nowrap">
                             {group.map((anime, animeIndex) => {
-                                const { src, name, id } = anime;
+                                const { main_picture, title, id } = anime.node ?? {};
                                 return (
                                     <AnimePreview
-                                        src={src}
-                                        name={name}
+                                        src={main_picture.medium}
+                                        name={title}
                                         id={id}
                                         key={id}
                                     />

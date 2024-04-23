@@ -38,6 +38,37 @@ router.get('/userInfo', async (req, res) => {
     } catch (err) {
         res.json({ message: err.message })
     }
-})
+});
+
+router.get('/dashboard', async (req, res) => {
+    try {
+        const bearerToken = req.get('Authorization');
+        const reqInstance = axios.create({
+            headers: {
+                Authorization: bearerToken
+            },
+        });
+        const newAnimeList = await reqInstance.get(`${MAL_API_BASE_URL}/anime/ranking?ranking_type=airing`)
+            .then((response) => {
+                return response.data.data;
+            });
+        const upcomingAnimeList = await reqInstance.get(`${MAL_API_BASE_URL}/anime/ranking?ranking_type=upcoming`)
+            .then((response) => {
+                return response.data.data;
+            });
+        const topAnimeList = await reqInstance.get(`${MAL_API_BASE_URL}/anime/ranking?ranking_type=bypopularity`)
+            .then((response) => {
+                return response.data.data;
+            });
+
+        res.json({
+            newList: newAnimeList,
+            upcomingList: upcomingAnimeList,
+            topList: topAnimeList
+        });
+    } catch (err) {
+        res.json({ message: err.message })
+    }
+});
 
 module.exports = router;

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     userInfo: {},
+    dashboard: {},
 };
 
 const myAnimeListSlice = createSlice({
@@ -11,8 +12,14 @@ const myAnimeListSlice = createSlice({
         setUserInfo: (state, action) => {
             state.userInfo = action.payload;
         },
+        setDashboardAnimeList: (state, action) => {
+            state.dashboard = action.payload;
+        },
     },
 });
 
-export const { setUserInfo } = myAnimeListSlice.actions;
+export const {
+    setUserInfo,
+    setDashboardAnimeList,
+} = myAnimeListSlice.actions;
 export default myAnimeListSlice.reducer;

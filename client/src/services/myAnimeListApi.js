@@ -43,7 +43,18 @@ export const myAnimeListApi = createApi({
                 };
             },
         }),
+        getDashboardAnimeList: builder.query({
+            query: () => {
+                return {
+                    url: '/dashboard',
+                };
+            },
+        }),
     }),
 })
 
-export const { useGetAccessTokenMutation, useLazyGetCurrentUserInfoQuery } = myAnimeListApi;
+export const {
+    useGetAccessTokenMutation,
+    useLazyGetCurrentUserInfoQuery,
+    useLazyGetDashboardAnimeListQuery
+} = myAnimeListApi;
