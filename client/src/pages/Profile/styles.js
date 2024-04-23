@@ -18,6 +18,9 @@ export const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         width: '250px',
     },
+    right: {
+        width: '100%',
+    },
     profilePicture: {
         width: '250px',
         border: `1px solid ${colors.lightGray2}`,

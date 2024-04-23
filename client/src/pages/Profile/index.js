@@ -5,7 +5,10 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useSelector } from "react-redux";
 import { selectUserInfo } from "../../slice/myAnimeListSlice.selector";
 
+
 import { useStyles } from "./styles";
+import DetailSection from "../../components/DetailSection";
+import ProfileChart from "../../components/ProfileChart";
 
 const Profile = () => {
     const classes = useStyles();
@@ -53,7 +56,9 @@ const Profile = () => {
                     </Box>
                 </Box>
                 <Box className={classes.right}>
-
+                    <DetailSection label="Statistics">
+                        <ProfileChart />
+                    </DetailSection>
                 </Box>
             </Box>
         </Box>
