@@ -1,5 +1,7 @@
 import React from "react";
-import { Box, Tooltip, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import StarIcon from '@mui/icons-material/Star';
+import PersonIcon from '@mui/icons-material/Person';
 import moment from 'moment';
 
 import { useStyles } from "./styles";
@@ -18,6 +20,8 @@ const AnimeMetadataTile = ({
     synopsis,
     studios = [],
     source,
+    mean,
+    numListUsers,
 }) => {
     const classes = useStyles();
     const navigate = useNavigate();
@@ -41,7 +45,7 @@ const AnimeMetadataTile = ({
                 {averageEpisodeDuration && <Typography>{averageEpisodeDuration/60} min</Typography>}
             </Box>
             <Box className={classes.genres}>
-                {genres.map((genre) => (
+                {genres.slice(0, 5).map((genre) => (
                     <Pill label={genre.name} size="small" />
                 ))}
             </Box>
@@ -63,6 +67,16 @@ const AnimeMetadataTile = ({
                     <Typography textTransform="capitalize" className={classes.supporting}>
                         <b>Source:</b> {source}
                     </Typography>
+                </Box>
+            </Box>
+            <Box className={classes.footer}>
+                <Box className={classes.footerInfo}>
+                    <StarIcon color="inherit" />
+                    <Typography>{mean ?? 'N/A'}</Typography>
+                </Box>
+                <Box className={classes.footerInfo}>
+                    <PersonIcon color="inherit" />
+                    <Typography>{numListUsers}</Typography>
                 </Box>
             </Box>
         </Box>

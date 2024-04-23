@@ -66,4 +66,19 @@ export const useStyles = makeStyles(() => ({
             textDecoration: 'underline',
         },
     },
+    footer: {
+        display: 'flex',
+        gap: '24px',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '8px',
+        backgroundColor: colors.lightGray,
+        flexWrap: 'wrap',
+    },
+    footerInfo: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        color: colors.gray,
+    },
 }));
