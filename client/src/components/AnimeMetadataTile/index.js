@@ -25,7 +25,7 @@ const AnimeMetadataTile = ({
 }) => {
     const classes = useStyles();
     const navigate = useNavigate();
-    const releaseDate = moment().format('LL')
+    const releaseDate = moment(startDate).format('LL');
 
     const handleTileClick = () => {
         navigate(`/anime/${id}`);
