@@ -8,7 +8,7 @@ export const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         overflowX: 'hidden',
-        overflowY: 'scroll',
+        overflowY: 'auto',
         alignItems: 'center',
     },
     content: {

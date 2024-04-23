@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         overflowX: 'hidden',
-        overflowY: 'scroll'
+        overflowY: 'auto',
     },
     content: {
         display: 'flex',
