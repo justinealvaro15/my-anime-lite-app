@@ -27,4 +27,7 @@ export const useStyles = makeStyles((theme) => ({
         fontWeight: '700 !important',
         cursor: 'pointer',
     },
+    link: {
+        textDecoration: 'none',
+    },
 }));

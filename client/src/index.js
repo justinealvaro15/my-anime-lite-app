@@ -10,6 +10,7 @@ import Layout from './pages/Layout';
 import Login from './pages/Login';
 import Auth from './pages/Auth';
 import AnimeDetails from './pages/AnimeDetails';
+import AnimeList from './pages/AnimeList';
 import { Provider } from 'react-redux'
 import { store } from './store';
 import Profile from './pages/Profile';
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/anime/:id",
         element: <AnimeDetails />,
+      },
+      {
+        path: "/anime",
+        element: <AnimeList />,
       },
       {
         path: "profile",

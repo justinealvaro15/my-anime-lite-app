@@ -1,7 +1,7 @@
 import React from "react";
 import { useStyles } from "./styles";
 import { Box, Typography } from "@mui/material";
-import { HEADER_SEARCH_CATEGORIES } from "./constants";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const classes = useStyles();
@@ -10,11 +10,11 @@ const Navbar = () => {
         <Box className={classes.root}>
             <Box className={classes.content}>
                 <Box className={classes.categoryList}>
-                    {HEADER_SEARCH_CATEGORIES.map((category) => (
-                        <Typography className={classes.category} key={category}>
-                            {category}
+                    <Link to="/anime" className={classes.link}>
+                        <Typography className={classes.category}>
+                            Anime
                         </Typography>
-                    ))}
+                    </Link>
                 </Box>
             </Box>
         </Box>
