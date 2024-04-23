@@ -6,7 +6,7 @@ const useMalApiHelper = (url) => {
     const dispatch = useDispatch();
     const [triggerGetUserInfo] = useLazyGetCurrentUserInfoQuery();
     const [triggerGetDashboardInfo] = useLazyGetDashboardAnimeListQuery();
-    const [triggerGetAnimeInfo] = useLazyGetAnimeInfoQuery();
+    const [triggerGetAnimeInfo, { isLoading: isAnimeInfoLoading }] = useLazyGetAnimeInfoQuery();
 
     const handleGetUserInfo = async (code, codeVerifier) => {
         try {
@@ -39,6 +39,7 @@ const useMalApiHelper = (url) => {
         onGetUserInfo: handleGetUserInfo,
         onGetAnimeInfo: handleGetAnimeInfo,
         onGetDashboardAnimeList: handleGetDashboardAnimeList,
+        isAnimeInfoLoading,
     };
 };
 

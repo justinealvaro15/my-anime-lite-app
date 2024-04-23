@@ -14,6 +14,7 @@ export const useStyles = makeStyles((theme) => ({
         alignSelf: 'center',
         padding: '10px',
         maxWidth: '1200px',
-        width: '100%'
+        width: '100%',
+        height: '100%',
     },
 }));

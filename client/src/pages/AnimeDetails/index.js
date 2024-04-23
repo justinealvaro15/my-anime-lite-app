@@ -10,11 +10,12 @@ import { selectAnimeInfo } from "../../slice/myAnimeListSlice.selector";
 
 import { useStyles } from "./styles";
 import { MEDIA_TYPE_LABEL_MAPPING } from "../../common/labels";
+import Loading from "../../components/Loading";
 
 const AnimeDetails = () => {
     const classes = useStyles();
     let { id } = useParams();
-    const { onGetAnimeInfo } = useMalApiHelper();
+    const { onGetAnimeInfo, isAnimeInfoLoading } = useMalApiHelper();
     const animeInfo = useSelector(selectAnimeInfo);
     const {
         title,
@@ -35,10 +36,10 @@ const AnimeDetails = () => {
         onGetAnimeInfo(id);
     }, []);
 
-    if (!id || isEmpty(animeInfo)) {
+    if (isAnimeInfoLoading) {
         return (
             <Box className={classes.root}>
-                Anime not found
+                <Loading />
             </Box>
         );
     }

@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
+        height: '100%',
         gap: '24px',
     },
     header: {
