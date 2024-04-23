@@ -22,10 +22,10 @@ const AnimePreviewCarousel = ({ headerText, data = [] }) => {
                     {groupIntoChunks(data, 5).map((group, groupIndex) => (
                         <Grid container key={groupIndex} className={classes.row} flexWrap="nowrap">
                             {group.map((anime, animeIndex) => {
-                                const { main_picture, title, id } = anime.node ?? {};
+                                const { mainPicture, title, id } = anime.node ?? {};
                                 return (
                                     <AnimePreview
-                                        src={main_picture.medium}
+                                        src={mainPicture.medium}
                                         name={title}
                                         id={id}
                                         key={id}

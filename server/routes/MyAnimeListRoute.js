@@ -51,15 +51,15 @@ router.get('/dashboard', async (req, res) => {
         });
         const newAnimeList = await reqInstance.get(`${MAL_API_BASE_URL}/anime/ranking?ranking_type=airing`)
             .then((response) => {
-                return response.data.data;
+                return humps.camelizeKeys(response.data.data);
             });
         const upcomingAnimeList = await reqInstance.get(`${MAL_API_BASE_URL}/anime/ranking?ranking_type=upcoming`)
             .then((response) => {
-                return response.data.data;
+                return humps.camelizeKeys(response.data.data);
             });
         const topAnimeList = await reqInstance.get(`${MAL_API_BASE_URL}/anime/ranking?ranking_type=bypopularity`)
             .then((response) => {
-                return response.data.data;
+                return humps.camelizeKeys(response.data.data);
             });
 
         res.json({
