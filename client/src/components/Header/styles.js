@@ -28,4 +28,7 @@ export const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         gap: '12px',
     },
+    link: {
+        textDecoration: 'none',
+    },
 }));

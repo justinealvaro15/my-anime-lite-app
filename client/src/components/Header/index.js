@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useStyles } from "./styles";
 import { Avatar, Box, Typography } from "@mui/material";
 import useMalApiHelper from "../../hooks/useMalApiHelper";
@@ -18,7 +19,11 @@ const Header = () => {
     return (
         <Box className={classes.root}>
             <Box className={classes.content}>
-                <Typography className={classes.title} variant="h5">MyAnimeLite</Typography>
+                <Link to="/" className={classes.link}>
+                    <Typography className={classes.title} variant="h4">
+                        MyAnimeLite
+                    </Typography>
+                </Link>
                 <Box className={classes.user}>
                     <Typography variant="body" fontWeight={500}>{name}</Typography>
                     <Avatar alt={name} src={picture} />
