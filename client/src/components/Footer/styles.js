@@ -18,5 +18,20 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%',
         padding: '12px 8px',
         boxSizing: 'border-box',
+        color: colors.white,
+    },
+    socials: {
+        alignItems: 'flex-end',
+    },
+    link: {
+        color: colors.white,
+        textDecoration: 'none',
+        '&:hover': {
+            color: colors.lightBlue,
+        },
+    },
+    logos: {
+        display: 'flex',
+        gap: '8px',
     },
 }));
