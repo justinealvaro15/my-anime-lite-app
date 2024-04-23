@@ -31,9 +31,10 @@ router.get('/userInfo', async (req, res) => {
                 Authorization: bearerToken
             },
         });
-        const response = await reqInstance.get(`${MAL_API_BASE_URL}/users/@me`)
+        // const response = await reqInstance.get(`${MAL_API_BASE_URL}/users/@me`)
+        const response = await reqInstance.get(`${MAL_API_BASE_URL}/users/@me?fields=anime_statistics`)
             .then((response) => {
-                res.json(response.data)
+                res.json(humps.camelizeKeys(response.data))
             });
     } catch (err) {
         res.json({ message: err.message })
