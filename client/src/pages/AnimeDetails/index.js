@@ -1,16 +1,41 @@
 import React, { useEffect } from "react";
 import { Box, Grid, Typography } from "@mui/material";
+import { isEmpty } from "lodash";
+import clsx from "clsx";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import useMalApiHelper from "../../hooks/useMalApiHelper";
+import { selectAnimeInfo } from "../../slice/myAnimeListSlice.selector";
 
 import { useStyles } from "./styles";
-import { useParams } from "react-router-dom";
-import clsx from "clsx";
+import { MEDIA_TYPE_LABEL_MAPPING } from "../../common/labels";
 
 const AnimeDetails = () => {
     const classes = useStyles();
     let { id } = useParams();
+    const { onGetAnimeInfo } = useMalApiHelper();
+    const animeInfo = useSelector(selectAnimeInfo);
+    const {
+        title,
+        alternativeTitles,
+        mediaType,
+        startSeason,
+        mean,
+        numListUsers,
+        numScoringUsers,
+        rank,
+        popularity,
+        mainPicture,
+        synopsis,
+        genres = [],
+    } = animeInfo;
 
+    useEffect(() => {
+        onGetAnimeInfo(id);
+    }, []);
 
-    if (!id) {
+    if (!id || isEmpty(animeInfo)) {
         return (
             <Box className={classes.root}>
                 Anime not found
@@ -23,41 +48,41 @@ const AnimeDetails = () => {
             <Grid className={classes.header}>
                 <Box>
                     <Typography variant="h4" fontWeight={700}>
-                        Bartender: Kami no Glass
+                        {title}
                     </Typography>
                     <Typography variant="h5" fontWeight={700} className={classes.gray}>
-                    Bartender: Glass of God
+                        {alternativeTitles?.en ?? alternativeTitles?.ja}
                     </Typography>
                 </Box>
                 <Box className={classes.headerTags}>
                     <Box className={classes.pill}>
                         <Typography fontWeight={500} variant="body">
-                            TV
+                            {MEDIA_TYPE_LABEL_MAPPING[mediaType]}
                         </Typography>
                     </Box>
                     <Box className={classes.pill}>
-                        <Typography fontWeight={500} variant="body">
-                            Spring 2024
+                        <Typography fontWeight={500} variant="body" textTransform="capitalize">
+                            {!isEmpty(startSeason) ? `${startSeason.season} ${startSeason.year}` : 'No Date Announced'}
                         </Typography>
                     </Box>
                 </Box>
             </Grid>
             <Grid className={classes.content}>
-                <img src="https://cdn.myanimelist.net/images/anime/1587/141789l.jpg" alt={id} />
+                <img src={mainPicture?.large ?? mainPicture?.medium} alt={title} />
                 <Grid flexDirection="column" container className={classes.metadata}>
                     <Grid className={classes.stats}>
                         <Box className={classes.statContainer}>
                             <Box className={clsx(classes.statEntry, classes.white)}>
-                                <Typography fontWeight={700} variant="h4">N/A</Typography>
+                                <Typography fontWeight={700} variant="h4">{mean ?? 'N/A'}</Typography>
                             </Box>
                             <Box>
                                 <Typography fontWeight={700} variant="h5">Score</Typography>
-                                <Typography>3457 users</Typography>
+                                <Typography>{numScoringUsers} users</Typography>
                             </Box>
                         </Box>
                         <Box className={classes.statContainer}>
                             <Box className={clsx(classes.statEntry, classes.white)}>
-                                <Typography fontWeight={700} variant="h4">N/A</Typography>
+                                <Typography fontWeight={700} variant="h4">{rank ?? 'N/A'}</Typography>
                             </Box>
                             <Box>
                                 <Typography fontWeight={700} variant="h5">Rank</Typography>
@@ -65,10 +90,11 @@ const AnimeDetails = () => {
                         </Box>
                         <Box className={classes.statContainer}>
                             <Box className={clsx(classes.statEntry, classes.white)}>
-                                <Typography fontWeight={700} variant="h4">N/A</Typography>
+                                <Typography fontWeight={700} variant="h4">{popularity ?? 'N/A'}</Typography>
                             </Box>
                             <Box>
                                 <Typography fontWeight={700} variant="h5">Popularity</Typography>
+                                <Typography>{numListUsers} users</Typography>
                             </Box>
                         </Box>
                     </Grid>
@@ -77,7 +103,7 @@ const AnimeDetails = () => {
                             Synopsis
                         </Typography>
                         <Typography variant="subtitle1">
-                            New season of Kimetsu no Yaiba.
+                            {synopsis}
                         </Typography>
                     </Grid>
                     <Grid>
@@ -85,16 +111,13 @@ const AnimeDetails = () => {
                             Genre
                         </Typography>
                         <Box className={classes.headerTags}>
-                            <Box className={classes.pill}>
-                                <Typography fontWeight={500} variant="body">
-                                    Action
-                                </Typography>
-                            </Box>
-                            <Box className={classes.pill}>
-                                <Typography fontWeight={500} variant="body">
-                                    Fantasy
-                                </Typography>
-                            </Box>
+                            {genres.map((genre) => (
+                                <Box className={classes.pill} key={genre.id}>
+                                    <Typography fontWeight={500} variant="body">
+                                        {genre.name}
+                                    </Typography>
+                                </Box>
+                            ))}
                         </Box>
                     </Grid>
                 </Grid>

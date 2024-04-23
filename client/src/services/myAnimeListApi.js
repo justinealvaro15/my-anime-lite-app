@@ -50,11 +50,20 @@ export const myAnimeListApi = createApi({
                 };
             },
         }),
+        getAnimeInfo: builder.query({
+            query: (id) => {
+                console.log('id', id)
+                return {
+                    url: `/info/${id}`,
+                };
+            },
+        }),
     }),
 })
 
 export const {
     useGetAccessTokenMutation,
     useLazyGetCurrentUserInfoQuery,
-    useLazyGetDashboardAnimeListQuery
+    useLazyGetDashboardAnimeListQuery,
+    useLazyGetAnimeInfoQuery,
 } = myAnimeListApi;
