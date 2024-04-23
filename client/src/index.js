@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Auth from './pages/Auth';
 import AnimeDetails from './pages/AnimeDetails';
 import AnimeList from './pages/AnimeList';
+import ProtectedRoute from './components/ProtectedRoute';
 import { Provider } from 'react-redux'
 import { store } from './store';
 import Profile from './pages/Profile';
@@ -27,7 +28,11 @@ const router = createBrowserRouter([
     element: <Auth />,
   },
   {
-    element: <Layout />,
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/anime/:id",
