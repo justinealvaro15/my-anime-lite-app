@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Layout from './pages/Layout';
 import Login from './pages/Login';
 import Auth from './pages/Auth';
+import AnimeDetails from './pages/AnimeDetails';
 import { Provider } from 'react-redux'
 import { store } from './store';
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
+      {
+        path: "/anime/:id",
+        element: <AnimeDetails />,
+      },
       {
         path: "/",
         element: <Home />,
