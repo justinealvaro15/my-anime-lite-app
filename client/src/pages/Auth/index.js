@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from "@mui/material";
+import { Box } from "@mui/material";
 
 import Footer from "../../components/Footer"
 
@@ -6,6 +6,7 @@ import useLoginHelper from "../../hooks/useLoginHelper";
 import { useStyles } from "./styles";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 const Auth = () => {
     const classes = useStyles();
@@ -20,9 +21,7 @@ const Auth = () => {
 
     return (
         <Box className={classes.root}>
-            <Box className={classes.content}>
-                <CircularProgress size="10rem" />
-            </Box>
+            <Loading />
             <Footer />
         </Box>
     );
