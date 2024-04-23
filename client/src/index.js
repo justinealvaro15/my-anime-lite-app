@@ -12,6 +12,7 @@ import Auth from './pages/Auth';
 import AnimeDetails from './pages/AnimeDetails';
 import { Provider } from 'react-redux'
 import { store } from './store';
+import Profile from './pages/Profile';
 
 const theme = createTheme();
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/anime/:id",
         element: <AnimeDetails />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
       {
         path: "/",

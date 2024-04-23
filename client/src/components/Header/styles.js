@@ -31,4 +31,7 @@ export const useStyles = makeStyles((theme) => ({
     link: {
         textDecoration: 'none',
     },
+    userName: {
+        color: colors.black,
+    },
 }));

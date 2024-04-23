@@ -5,6 +5,7 @@ import { Avatar, Box, Typography } from "@mui/material";
 import useMalApiHelper from "../../hooks/useMalApiHelper";
 import { useSelector } from "react-redux";
 import { selectUserInfo } from "../../slice/myAnimeListSlice.selector";
+import clsx from "clsx";
 
 const Header = () => {
     const classes = useStyles();
@@ -24,10 +25,16 @@ const Header = () => {
                         MyAnimeLite
                     </Typography>
                 </Link>
-                <Box className={classes.user}>
-                    <Typography variant="body" fontWeight={500}>{name}</Typography>
+                <Link to="/profile" className={clsx(classes.link, classes.user)}>
+                    <Typography
+                        variant="body"
+                        fontWeight={500}
+                        className={classes.userName}
+                    >
+                        {name}
+                    </Typography>
                     <Avatar alt={name} src={picture} />
-                </Box>
+                </Link>
             </Box>
         </Box>
     );
