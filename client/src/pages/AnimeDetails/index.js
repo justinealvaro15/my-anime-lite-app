@@ -8,9 +8,12 @@ import { useParams } from "react-router-dom";
 import useMalApiHelper from "../../hooks/useMalApiHelper";
 import { selectAnimeInfo } from "../../slice/myAnimeListSlice.selector";
 
+import Loading from "../../components/Loading";
+import Pill from "../../components/Pill";
 import { useStyles } from "./styles";
 import { MEDIA_TYPE_LABEL_MAPPING } from "../../common/labels";
-import Loading from "../../components/Loading";
+import Metadata from "../../components/Metadata";
+import DetailSection from "../../components/DetailSection";
 
 const AnimeDetails = () => {
     const classes = useStyles();
@@ -55,72 +58,42 @@ const AnimeDetails = () => {
                         {alternativeTitles?.en ?? alternativeTitles?.ja}
                     </Typography>
                 </Box>
-                <Box className={classes.headerTags}>
-                    <Box className={classes.pill}>
-                        <Typography fontWeight={500} variant="body">
-                            {MEDIA_TYPE_LABEL_MAPPING[mediaType]}
-                        </Typography>
-                    </Box>
-                    <Box className={classes.pill}>
-                        <Typography fontWeight={500} variant="body" textTransform="capitalize">
-                            {!isEmpty(startSeason) ? `${startSeason.season} ${startSeason.year}` : 'No Date Announced'}
-                        </Typography>
-                    </Box>
+                <Box className={classes.tags}>
+                    <Pill label={MEDIA_TYPE_LABEL_MAPPING[mediaType] ?? mediaType} />
+                    <Pill label={!isEmpty(startSeason) ? `${startSeason.season} ${startSeason.year}` : 'No Date Announced'} />
                 </Box>
             </Grid>
             <Grid className={classes.content}>
                 <img src={mainPicture?.large ?? mainPicture?.medium} alt={title} />
                 <Grid flexDirection="column" container className={classes.metadata}>
                     <Grid className={classes.stats}>
-                        <Box className={classes.statContainer}>
-                            <Box className={clsx(classes.statEntry, classes.white)}>
-                                <Typography fontWeight={700} variant="h4">{mean ?? 'N/A'}</Typography>
-                            </Box>
-                            <Box>
-                                <Typography fontWeight={700} variant="h5">Score</Typography>
-                                <Typography>{numScoringUsers} users</Typography>
-                            </Box>
-                        </Box>
-                        <Box className={classes.statContainer}>
-                            <Box className={clsx(classes.statEntry, classes.white)}>
-                                <Typography fontWeight={700} variant="h4">{rank ?? 'N/A'}</Typography>
-                            </Box>
-                            <Box>
-                                <Typography fontWeight={700} variant="h5">Rank</Typography>
-                            </Box>
-                        </Box>
-                        <Box className={classes.statContainer}>
-                            <Box className={clsx(classes.statEntry, classes.white)}>
-                                <Typography fontWeight={700} variant="h4">{popularity ?? 'N/A'}</Typography>
-                            </Box>
-                            <Box>
-                                <Typography fontWeight={700} variant="h5">Popularity</Typography>
-                                <Typography>{numListUsers} users</Typography>
-                            </Box>
-                        </Box>
+                        <Metadata
+                            data={mean ?? 'N/A'}
+                            label="Score"
+                            subLabel={`${numScoringUsers} users`}
+                        />
+                        <Metadata
+                            data={rank ? `#${rank}` : 'N/A'}
+                            label="Rank"
+                        />
+                        <Metadata
+                            data={popularity ? `#${popularity}` : 'N/A'}
+                            label="Popularity"
+                            subLabel={`${numListUsers} users`}
+                        />
                     </Grid>
-                    <Grid>
-                        <Typography variant="h5" fontWeight={700} className={clsx(classes.blue, classes.subtitle)} gutterBottom>
-                            Synopsis
-                        </Typography>
+                    <DetailSection label="Synopsis">
                         <Typography variant="subtitle1">
                             {synopsis}
                         </Typography>
-                    </Grid>
-                    <Grid>
-                        <Typography variant="h5" fontWeight={700} className={clsx(classes.blue, classes.subtitle)} gutterBottom>
-                            Genre
-                        </Typography>
-                        <Box className={classes.headerTags}>
+                    </DetailSection>
+                    <DetailSection label="Genre">
+                        <Box className={classes.tags}>
                             {genres.map((genre) => (
-                                <Box className={classes.pill} key={genre.id}>
-                                    <Typography fontWeight={500} variant="body">
-                                        {genre.name}
-                                    </Typography>
-                                </Box>
+                                <Pill label={genre.name} />
                             ))}
                         </Box>
-                    </Grid>
+                    </DetailSection>
                 </Grid>
             </Grid>
         </Grid>

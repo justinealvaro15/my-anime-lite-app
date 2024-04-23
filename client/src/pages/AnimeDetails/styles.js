@@ -37,16 +37,10 @@ export const useStyles = makeStyles((theme) => ({
     white: {
         color: colors.white,
     },
-    headerTags: {
+    tags: {
         display: 'flex',
         alignItems: 'center',
         gap: '12px',
-    },
-    pill: {
-        padding: '8px',
-        border: `2px solid ${colors.blue}`,
-        borderRadius: '8px',
-        backgroundColor: colors.lightBlue,
     },
     stats: {
         display: 'flex',
@@ -56,21 +50,5 @@ export const useStyles = makeStyles((theme) => ({
         borderRadius: '4px',
         justifyContent: 'space-between',
         alignItems: 'center',
-    },
-    statContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: '12px',
-    },
-    statEntry: {
-        padding: '16px',
-        borderRadius: '8px',
-        backgroundColor: colors.blue,
-    },
-    subtitle: {
-        display: 'flex',
-        width: '100%',
-        borderBottom: `1px solid ${colors.lightGray2}`,
-        paddingBottom: '8px',
     },
 }));
