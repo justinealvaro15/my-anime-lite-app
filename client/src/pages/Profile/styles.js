@@ -22,20 +22,7 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%',
     },
     profilePicture: {
-        width: '250px',
-        border: `1px solid ${colors.lightGray2}`,
-    },
-    tempProfilePicture: {
-        width: '250px',
-        height: '250px',
-        backgroundColor: colors.lightBlue,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        color: colors.gray,
-        border: `1px solid ${colors.lightGray2}`,
-        boxSizing: 'border-box',
+        marginBottom: '12px',
     },
     personalInfo: {
         display: 'flex',

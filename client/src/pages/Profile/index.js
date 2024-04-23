@@ -1,7 +1,6 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import moment from 'moment';
-import PersonIcon from '@mui/icons-material/Person';
 import { useSelector } from "react-redux";
 import { selectUserInfo } from "../../slice/myAnimeListSlice.selector";
 
@@ -19,21 +18,13 @@ const Profile = () => {
         <Box className={classes.root}>
             <Box className={classes.content}>
                 <Box className={classes.left}>
-                    {picture ? (
-                        <Box
-                            className={classes.profilePicture}
-                            component="img"
-                            src={picture}
-                            alt={name}
-                        />
-                    ) : (
-                        <Box className={classes.tempProfilePicture}>
-                            <PersonIcon color="inherit" fontSize="large" />
-                            <Typography color="inherit">
-                                No Image
-                            </Typography>
-                        </Box>
-                    )}
+                    <Avatar
+                        src={picture}
+                        alt={name}
+                        className={classes.profilePicture}
+                        variant="rounded"
+                        sx={{ width: 250, height: 250 }}
+                    />
                     <Box className={classes.personalInfo}>
                         <Box className={classes.personalInfoEntry}>
                             <Typography><b>Gender</b></Typography>
