@@ -42,7 +42,7 @@ const AnimeMetadataTile = ({
                 <Typography>{releaseDate}</Typography>
                 <Typography>|</Typography>
                 {numEpisodes && <Typography>{numEpisodes} eps,</Typography>}
-                {averageEpisodeDuration && <Typography>{averageEpisodeDuration/60} min</Typography>}
+                {averageEpisodeDuration && <Typography>{Math.ceil(averageEpisodeDuration/60)} min</Typography>}
             </Box>
             <Box className={classes.genres}>
                 {genres.slice(0, 5).map((genre) => (
